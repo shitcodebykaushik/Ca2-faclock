@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Kodinger">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Farmer Login &mdash; FacLock</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/my-login.css') }}">
+</head>
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="brand">
+						<img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="logo">
+					</div>
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title text-center">Farmer Login</h4>
+
+							<!-- Manual Login Form -->
+							<form method="POST" class="my-login-validation" novalidate="">
+								<input type="hidden" name="login_type" value="manual">
+
+								<div class="form-group">
+									<label for="phone">Phone Number</label>
+									<input id="phone" type="text" class="form-control" name="phone" required autofocus>
+									<div class="invalid-feedback">Please enter your phone number.</div>
+								</div>
+
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input id="password" type="password" class="form-control" name="password" required data-eye>
+									<div class="invalid-feedback">Password is required.</div>
+								</div>
+
+								<div class="form-group m-0">
+									<button type="submit" class="btn btn-primary btn-block">
+										Login Manually
+									</button>
+								</div>
+							</form>
+
+							<hr class="my-4">
+
+							<!-- Facial Login Form -->
+							<form method="POST">
+								<input type="hidden" name="login_type" value="face">
+								<div class="form-group m-0">
+									<button type="submit" class="btn btn-success btn-block">
+										Login with Face Recognition
+									</button>
+								</div>
+							</form>
+
+							<div class="mt-4 text-center">
+								New here? <a href="{{ url_for('signin') }}">Sign up</a>
+							</div>
+						</div>
+					</div>
+					<div class="footer">
+						&copy; 2025 &mdash; FacLock
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<script src="{{ url_for('static', filename='js/my-login.js') }}"></script>
+</body>
+</html>

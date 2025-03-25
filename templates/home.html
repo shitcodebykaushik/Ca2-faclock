@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home - FacLock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: #2e7d32 !important;
+    }
+
+    .dropdown-menu {
+      min-width: 220px;
+    }
+
+    .auction-list {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .rounded-circle {
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <a class="navbar-brand" href="#">FacLock</a>
+
+    <div class="ml-auto d-flex align-items-center">
+      <a class="nav-link d-inline-block" href="#">Market</a>
+      <a class="nav-link d-inline-block" href="#">News</a>
+
+      <!-- Profile dropdown -->
+      <div class="dropdown ml-3">
+        <a class="dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="data:image/jpeg;base64,{{ user.profile_img }}" alt="User" class="rounded-circle" width="40" height="40">
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow-sm" aria-labelledby="profileDropdown">
+          <div class="dropdown-item-text text-center">
+            <strong>{{ user.name }}</strong><br>
+            <small>Aadhaar: {{ user.aadhaar }}</small><br>
+            <small>Phone: {{ user.phone }}</small>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item text-danger text-center" href="/logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid mt-4">
+    <div class="row">
+
+      <!-- MAIN AUCTION SECTION -->
+      <div class="col-md-12">
+        <div class="auction-list">
+          <h4 class="mb-4">Available Products for Auction</h4>
+
+          <!-- Placeholder Product Cards -->
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Tractor (Model X)</h5>
+                  <p class="card-text">Current bid: ₹50,000</p>
+                  <a href="#" class="btn btn-success btn-sm">View Auction</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Harvesting Tool</h5>
+                  <p class="card-text">Current bid: ₹12,000</p>
+                  <a href="#" class="btn btn-success btn-sm">View Auction</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Spray Machine</h5>
+                  <p class="card-text">Current bid: ₹8,500</p>
+                  <a href="#" class="btn btn-success btn-sm">View Auction</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
