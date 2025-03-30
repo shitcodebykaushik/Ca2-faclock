@@ -15,7 +15,7 @@
 	<!-- Background Style -->
 	<style>
 		body {
-			background-image: url("{{ url_for('static', filename='img/farm.jpeg') }}");
+			background-image: url("../static/farm.jpeg");
 			background-size: cover;
 			background-position: center;
 			background-repeat: no-repeat;
@@ -27,11 +27,9 @@
 <body class="my-login-page">
 	<section class="h-100">
 		<div class="container h-100">
-			<div class="row justify-content-md-center h-100">
+			<div class="row justify-content-center align-items-center h-100">
 				<div class="card-wrapper">
-					<div class="brand">
-						<img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="logo">
-					</div>
+					<!-- Removed the logo/brand div -->
 					<div class="card fat">
 						<div class="card-body">
 							<h4 class="card-title text-center">Farmer Login</h4>

@@ -15,35 +15,25 @@
       background-attachment: fixed;
       font-family: 'Segoe UI', sans-serif;
     }
-
     .signup-container {
       max-width: 500px;
       margin: 50px auto;
       padding: 30px;
-      background-color: rgba(255, 255, 255, 0.95); /* slightly transparent white */
+      background-color: rgba(255, 255, 255, 0.95);
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0, 100, 0, 0.1);
     }
-
     .form-title {
       color: #2e7d32;
       font-weight: bold;
       text-align: center;
       margin-bottom: 20px;
     }
-
-    .harvester-logo {
-      display: block;
-      margin: 0 auto 20px;
-      width: 80px;
-    }
-
     .btn-farm {
       background-color: #4caf50;
       color: white;
       font-weight: bold;
     }
-
     .btn-farm:hover {
       background-color: #388e3c;
     }
@@ -52,7 +42,34 @@
 <body>
   <div class="container">
     <div class="signup-container">
-      <img src="file:///home/aznet/faclock/assets/harvester.png" alt="FacLock" class="harvester-logo">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="alert alert-success text-center" role="alert">
+            {{ messages[0] }}
+          </div>
+          <script>
+            // Wait 40 seconds before showing a browser notification
+            setTimeout(function(){
+              // Check if browser supports notifications
+              if (!("Notification" in window)) {
+                alert("Your account has been created successfully!");
+              } else if (Notification.permission === "granted") {
+                new Notification("Your account has been created successfully!");
+              } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(function (permission) {
+                  if (permission === "granted") {
+                    new Notification("Your account has been created successfully!");
+                  } else {
+                    alert("Your account has been created successfully!");
+                  }
+                });
+              } else {
+                alert("Your account has been created successfully!");
+              }
+            }, 40000); // 40000 milliseconds = 40 seconds
+          </script>
+        {% endif %}
+      {% endwith %}
 
       <h2 class="form-title">Farmer Sign Up</h2>
 
