@@ -7,9 +7,16 @@
   <link rel="stylesheet"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <style>
+    /* Flex layout for full-page design with footer at bottom */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
     body {
       background-color: #f8f9fa;
       font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
     }
     .navbar-brand {
       font-weight: bold;
@@ -18,19 +25,36 @@
     .dropdown-menu {
       min-width: 220px;
     }
+    /* Main content container takes remaining space */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
     .auction-list {
       background: #fff;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-bottom: 40px;
     }
-    .rounded-circle {
-      object-fit: cover;
+    /* Container for placed bids */
+    #chatContainer {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+    footer {
+      background: #fff;
+      padding: 10px 0;
+      text-align: center;
+      box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
-
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <a class="navbar-brand" href="#">FacLock</a>
@@ -55,30 +79,71 @@
     </div>
   </nav>
 
-  <div class="container-fluid mt-4">
-    <div class="row">
-      <!-- MAIN AUCTION SECTION -->
-      <div class="col-md-12">
-        <div class="auction-list">
-          <h4 class="mb-4">Available Products for Auction</h4>
-          <!-- Container where the PHP tractor content will be loaded -->
-          <div id="productContainer"></div>
-        </div>
-      </div>
+  <!-- Main Content -->
+  <div class="container-fluid content">
+    <!-- Auction Section -->
+    <div class="auction-list">
+      <h4 class="mb-4">Available Products for Auction</h4>
+      <!-- Container where the PHP auction content (product cards) will be loaded -->
+      <div id="productContainer"></div>
+    </div>
+    
+    <!-- Your Placed Bids Section -->
+    <div id="chatContainer">
+      <h4 class="mb-3">Your Placed Bids</h4>
+      <!-- Placed bid items will be appended here -->
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 FacLock. All rights reserved.</p>
+    </div>
+  </footer>
 
   <!-- jQuery and Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script>
     $(document).ready(function() {
-      // Replace the URL below with the full URL of your PHP server if needed
+      // Load the product cards from tractor.php into productContainer
       $("#productContainer").load("http://localhost:8000/tractor.php")
         .fail(function(jqXHR, textStatus, errorThrown) {
           console.error("Failed to load tractor.php: " + textStatus + ", " + errorThrown);
           $("#productContainer").html("<p>Error loading product details.</p>");
         });
+      
+      // Use event delegation specifically for buttons inside #productContainer
+      $("#productContainer").on("click", ".place-bid", function(e) {
+        e.preventDefault();
+        console.log("Place Bid clicked!"); // Debugging log
+        // Retrieve product details from data attributes
+        var productName = $(this).data("name");
+        var productPrice = $(this).data("price");
+        var productCurrentBid = $(this).data("current-bid");
+        var productAuctionEnd = $(this).data("auction-end");
+        var productImage = $(this).data("image");
+        
+        console.log("Product: ", productName, productPrice, productCurrentBid, productAuctionEnd, productImage);
+        
+        // Create bid card HTML
+        var bidHtml = '<div class="card mb-3">' +
+                        '<div class="card-body">' +
+                          '<div class="media">' +
+                            '<img src="' + productImage + '" class="mr-3" alt="' + productName + '" style="width:50px; height:50px; border-radius:50%;">' +
+                            '<div class="media-body">' +
+                              '<h6 class="mt-0">' + productName + '</h6>' +
+                              '<p>Starting Price: ' + productPrice + ' | Current Bid: ' + productCurrentBid + '</p>' +
+                              '<p>Auction Ends: ' + productAuctionEnd + '</p>' +
+                            '</div>' +
+                          '</div>' +
+                        '</div>' +
+                      '</div>';
+        
+        // Append the bid card to the "Your Placed Bids" container
+        $("#chatContainer").append(bidHtml);
+      });
     });
   </script>
 </body>
