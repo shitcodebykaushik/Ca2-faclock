@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Farmer Sign Up - FacLock</title>
+  <title>Farmer Login - FacLock</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -16,11 +16,11 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
-    .signup-container {
+    .login-container {
       max-width: 500px;
       margin: 50px auto;
       padding: 30px;
-      background-color: rgba(255, 255, 255, 0.95); /* slightly transparent white */
+      background-color: rgba(255, 255, 255, 0.95);
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0, 100, 0, 0.1);
     }
@@ -47,26 +47,24 @@
     .btn-farm:hover {
       background-color: #388e3c;
     }
+
+    .or-divider {
+      text-align: center;
+      margin: 15px 0;
+      font-weight: bold;
+      color: #555;
+    }
+
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="signup-container">
+    <div class="login-container">
       <img src="file:///home/aznet/faclock/assets/harvester.png" alt="FacLock" class="harvester-logo">
 
-      <h2 class="form-title">Farmer Sign Up</h2>
+      <h2 class="form-title">Farmer Login</h2>
 
-      <form method="POST">
-        <div class="form-group">
-          <label for="name">Full Name</label>
-          <input id="name" type="text" class="form-control" name="name" required>
-        </div>
-
-        <div class="form-group">
-          <label for="aadhaar">Aadhaar Number</label>
-          <input id="aadhaar" type="text" class="form-control" name="aadhaar" required>
-        </div>
-
+      <form method="POST" action="/login">
         <div class="form-group">
           <label for="phone">Phone Number</label>
           <input id="phone" type="text" class="form-control" name="phone" required>
@@ -77,11 +75,19 @@
           <input id="password" type="password" class="form-control" name="password" required>
         </div>
 
-        <button type="submit" class="btn btn-farm btn-block">Register & Capture Face</button>
+        <button type="submit" class="btn btn-farm btn-block">Login</button>
+      </form>
+
+      <div class="or-divider">OR</div>
+
+      <form method="POST" action="/face_login">
+        <button type="submit" class="btn btn-outline-success btn-block">
+          Login with Face Recognition
+        </button>
       </form>
 
       <div class="text-center mt-3">
-        Already have an account? <a href="{{ url_for('login') }}">Login here</a>
+        Don’t have an account? <a href="{{ url_for('signin') }}">Sign up here</a>
       </div>
     </div>
   </div>

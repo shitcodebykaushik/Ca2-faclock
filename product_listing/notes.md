@@ -1,0 +1,1 @@
+ After capturing the face give the promt that your face has been registerd succesfully .
